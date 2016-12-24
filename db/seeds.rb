@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # Place holder values, just for testing
 mag1 = Shop.create(chain: 'CH1', name: 'Shopp1')
+mag1 = Shop.create(chain: 'CH2', name: 'Shopp2')
