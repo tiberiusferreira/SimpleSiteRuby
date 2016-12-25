@@ -22,14 +22,17 @@ tr:nth-child(even) {
 <body>
 
 <table>
+  <%= link_to 'New Shop', "shops/new" %>
   <tr>
     <th>Chain</th>
     <th>Name</th>
+    <th>Edit</th>
   </tr>
   <% @shops.each do |shop| %>
   <tr>
     <td><%= shop.chain %></td>
     <td><%= shop.name %></td>
+    <td><%= button_to "Details", shop, :method=> 'get' %><td>
   </tr>
   <% end %>
   <tr>
