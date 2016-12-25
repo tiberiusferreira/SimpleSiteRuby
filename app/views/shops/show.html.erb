@@ -1,6 +1,14 @@
 <h2>Shop Information</h2>
 <%= @shop.name %><br />
 <%= @shop.chain %><br />
+<%= @shop.latitude %><br />
+<%= @shop.longitude %><br />
+<%= @shop.address %><br />
+<%= @shop.city %><br />
+<%= @shop.zip %><br />
+<%= @shop.phone %><br />
+<%= @shop.country_code %><br />
+
 
 <%= button_to "Delete", @shop, :method => :delete, form: {style: 'display:inline-block;'} %>
 <%= button_to "Edit", [:edit, @shop], :method => :get , form: {style: 'display:inline-block;'}%>

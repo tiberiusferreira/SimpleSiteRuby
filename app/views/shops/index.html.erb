@@ -26,12 +26,26 @@ tr:nth-child(even) {
   <tr>
     <th>Chain</th>
     <th>Name</th>
-    <th>Edit</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Zip</th>
+    <th>Phone</th>
+    <th>Country code</th>
+    <th>Details</th>
   </tr>
   <% @shops.each do |shop| %>
   <tr>
     <td><%= shop.chain %></td>
     <td><%= shop.name %></td>
+    <td><%= shop.latitude %></td>
+    <td><%= shop.longitude %></td>
+    <td><%= shop.address %></td>
+    <td><%= shop.city %></td>
+    <td><%= shop.zip %></td>
+    <td><%= shop.phone %></td>
+    <td><%= shop.country_code %></td>
     <td><%= button_to "Details", shop, :method=> 'get' %><td>
   </tr>
   <% end %>
