@@ -1,3 +1,94 @@
 <h2>Home Page</h2>
 
 <p>This would be a static home page in a Rails application.</p>
+<head>
+  <style>
+     #map {
+      height: 400px;
+      width: 50%;
+     }
+  </style>
+</head>
+<body>
+  <h3>Shops</h3>
+  <p>Click the button to get your coordinates.</p>
+
+  <button onclick="getLocation()">Try It</button>
+  <button onclick="showLat()">Show lat</button>
+
+
+  <p id="demo"></p>
+
+  <div id="map"></div>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOAcTqov7sfiYl5EiNeR5sLBE33aPXmo4&signed_in=true"></script>
+  <script>
+var latitude;
+var longitude;
+var x = document.getElementById("demo");
+
+function getLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(savePosition);
+
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+
+
+
+
+  function savePosition(position) {
+      x.innerHTML = "Latitude: " + position.coords.latitude +
+      "<br>Longitude: " + position.coords.longitude;
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+
+  }
+
+
+  // In the following example, markers appear when the user clicks on the map.
+  // Each marker is labeled with a single alphabetical character.
+
+  function initialize() {
+    getLocation();
+    if(typeof latitude == "undefined"){
+        setTimeout(initialize, 250);
+    }
+    var home = { lat: latitude, lng: longitude };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: home
+    });
+
+    // This event listener calls addMarker() when the map is clicked.
+    google.maps.event.addListener(map, 'click', function(event) {
+      // addMarker(event.latLng, map);
+    });
+
+    // Add a marker at the center of the map.
+    <% @shops.each do |event| %>
+
+      addMarker({lat: <%= event.latitude %>, lng:<%= event.longitude %>}, map,'<%= event.name %>');
+    <% end %>
+    // x.innerHTML = "a " + shops;
+
+    // addMarker(home, map);
+  }
+
+  // Adds a marker to the map.
+  function addMarker(location, map, name) {
+    // Add the marker at the clicked location, and add the next-available label
+    // from the array of alphabetical characters.
+    var marker = new google.maps.Marker({
+      position: location,
+      title: name,
+      map: map
+    });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</body>
