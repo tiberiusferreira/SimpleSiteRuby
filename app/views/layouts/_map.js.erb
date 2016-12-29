@@ -1,7 +1,7 @@
 var map ;
 
 var markers = [];
-var mySelect = document.getElementById("mySelect")
+var distanceSelect = document.getElementById("distanceSelect")
 var distance = 10;
 var latitude;
 var longitude;
@@ -9,42 +9,14 @@ var longitude;
 function ok(){
   y.innerHTML = "ok";
 }
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
 
-mySelect.onchange = function() {
+distanceSelect.onchange = function() {
   //change the tag innerHTML checking the selected value of the select
-  distance = mySelect.value
-  y.innerHTML = "Dist = " + distance
+  distance = distanceSelect.value
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
-  <% @shops.each do |shop| %>
-  var shoplat = <%= shop.latitude %>
-  var shoplong = <%= shop.longitude %>
-  dist = getDistanceFromLatLonInKm(shoplat, shoplong, latitude, longitude)
-  if( dist < distance ){
-
-    addMarker({lat: <%= shop.latitude %>, lng:<%= shop.longitude %>}, map,'<%= shop.name %>');
-  }
-  <% end %>
-}
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
+  filterMarkers(distance)
 }
 
 var x = document.getElementById("demo");
@@ -89,7 +61,11 @@ function initialize(position) {
   });
 
   // Add a marker at the center of the map.
+  filterMarkers(5)
 
+}
+
+function filterMarkers(distance){
   <% @shops.each do |shop| %>
   var shoplat = <%= shop.latitude %>
   var shoplong = <%= shop.longitude %>
@@ -99,7 +75,6 @@ function initialize(position) {
   }
   <% end %>
 }
-
 // Adds a marker to the map.
 function addMarker(location, map, name) {
   // Add the marker at the clicked location, and add the next-available label
