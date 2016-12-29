@@ -1,24 +1,11 @@
-# README
+# ShopFinder 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Just a simple Website written mostly in Ruby
 
-Things you may want to cover:
+Its propose is to help me learn Ruby and Ruby on Rails
 
-* Ruby version
+It uses a database of Shops and its location given by a CSV file and imported by the Rake task create_shops
 
-* System dependencies
+The website itself is very simple and shows a Google Maps view where the user can filter the Shops closest to him by distance or number of shops as can be seen below
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![alt tag](https://github.com/tiberiusferreira/StageRuby/blob/master/SampleScreenShot.png)
