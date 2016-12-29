@@ -5,7 +5,14 @@ var distanceSelect = document.getElementById("distanceSelect")
 var distance = 10;
 var latitude;
 var longitude;
+var shops = <%= raw @shops.to_json %>;
 
+function sortShopsDist(userLat, userLong){
+  shops.sort(function(a, b) {
+      return parseFloat(getDistanceFromLatLonInKm(a.latitude, a.longitude, userLat, userLong)
+    ) - parseFloat(getDistanceFromLatLonInKm(b.latitude, b.longitude, userLat, userLong));
+  });
+}
 function ok(){
   y.innerHTML = "ok";
 }
@@ -19,11 +26,20 @@ distanceSelect.onchange = function() {
   filterMarkers(distance)
 }
 
+numberSelect.onchange = function() {
+  //change the tag innerHTML checking the selected value of the select
+  distance = numberSelect.value
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  filterMarkersNumber(distance)
+}
+
 var x = document.getElementById("demo");
 var y = document.getElementById("demo2");
 
 
-
+// x.innerHTML = shops[0]
 
 
 
@@ -50,6 +66,7 @@ function deg2rad(deg) {
 function initialize(position) {
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
+  sortShopsDist(latitude, longitude);
   var home = { lat: latitude, lng: longitude };
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
@@ -74,6 +91,14 @@ function filterMarkers(distance){
     addMarker({lat: <%= shop.latitude %>, lng:<%= shop.longitude %>}, map,'<%= shop.name %>');
   }
   <% end %>
+}
+
+function filterMarkersNumber(number){
+  for (var i = 0; i < number && shops.length > i; i++) {
+      addMarker({lat: shops[i].latitude, lng:shops[i].longitude}, map,shops[i].name);
+      
+  }
+
 }
 // Adds a marker to the map.
 function addMarker(location, map, name) {
