@@ -16,34 +16,56 @@
   margin-left:auto;
   margin-right:auto;
 }
+#distanceSelect {
+  text-align: center;
+
+  margin:0 auto;
+
+}
+#numberSelect {
+  text-align: center;
+
+
+}
+
 </style>
+
 <body>
+  <div id="Container", class="center">
+
+    <div id="DistanceButton">
+      Filter by distance
+    <select id="distanceSelect" name="list">
+      <option value="1">1 Km</option>
+      <option value="2">2 Km</option>
+      <option value="4">4 Km</option>
+      <option value="8">8 Km</option>
+      <option value="16">16 Km</option>
+      <option value="32">32 Km</option>
+      <option value="9999">All</option>
+    </select>
+  </div>
+  or closest shops
+  <select id="numberSelect" name="list">
+    <option value="1">1 Shop</option>
+    <option value="2">2 Shops</option>
+    <option value="4">4 Shops</option>
+    <option value="8">8 Shops</option>
+    <option value="16">16 Shops</option>
+    <option value="32">32 Shops</option>
+    <option value="9999">All Shops</option>
+  </select>
+</div>
+
+
 <div id="map"></div>
 
 
-  <p id="demo"></p>
-  <p id="demo2"></p>
+  <p id="debug"></p>
+  <p id="debug2"></p>
 
 
-  <select id="distanceSelect" name="list" size="1">
-    <option value="1">1 Km</option>
-    <option value="2">2 Km</option>
-    <option value="4">4 Km</option>
-    <option value="8">8 Km</option>
-    <option value="16">16 Km</option>
-    <option value="32">32 Km</option>
-    <option value="9999">ALL</option>
-  </select>
 
-  <select id="numberSelect" name="list" size="1">
-    <option value="1">1 Km</option>
-    <option value="2">2 Km</option>
-    <option value="4">4 Km</option>
-    <option value="8">8 Km</option>
-    <option value="16">16 Km</option>
-    <option value="32">32 Km</option>
-    <option value="9999">ALL</option>
-  </select>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOAcTqov7sfiYl5EiNeR5sLBE33aPXmo4&signed_in=true"></script>
   <script>

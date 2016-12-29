@@ -2,7 +2,7 @@ var map ;
 
 var markers = [];
 var distanceSelect = document.getElementById("distanceSelect")
-var distance = 10;
+var distance = 10; // default value
 var latitude;
 var longitude;
 var shops = <%= raw @shops.to_json %>;
@@ -35,8 +35,8 @@ numberSelect.onchange = function() {
   filterMarkersNumber(distance)
 }
 
-var x = document.getElementById("demo");
-var y = document.getElementById("demo2");
+var x = document.getElementById("debug");
+var y = document.getElementById("debug2");
 
 
 // x.innerHTML = shops[0]
@@ -78,11 +78,12 @@ function initialize(position) {
   });
 
   // Add a marker at the center of the map.
-  filterMarkers(5)
+  filterMarkersNumber(5)
 
 }
 
 function filterMarkers(distance){
+
   <% @shops.each do |shop| %>
   var shoplat = <%= shop.latitude %>
   var shoplong = <%= shop.longitude %>
@@ -96,7 +97,7 @@ function filterMarkers(distance){
 function filterMarkersNumber(number){
   for (var i = 0; i < number && shops.length > i; i++) {
       addMarker({lat: shops[i].latitude, lng:shops[i].longitude}, map,shops[i].name);
-      
+
   }
 
 }
